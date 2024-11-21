@@ -34,10 +34,19 @@ namespace PizzaLibrary.Services
             //JsonFileWriter.WritetoJson(events, JsonFileName);
         }
 
+        public List<Customer> FilterCustomers(string name)
+        {
+            throw new NotImplementedException();
+        }
 
         public Dictionary<string, Customer> GetAll()
         {
             return JsonFileReader.ReadJson(JsonFileName);
+        }
+
+        public Customer GetCustomerById(int id)
+        {
+            throw new NotImplementedException();
         }
 
         public Customer GetCustomerByMobile(string mobile)
@@ -51,6 +60,16 @@ namespace PizzaLibrary.Services
         }
 
         public void RemoveCustomer(string mobile)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCustomer(Customer customer)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateCustomer(int id, string name, string mobile, string address)
         {
             throw new NotImplementedException();
         }

@@ -11,7 +11,6 @@ namespace PizzaLibrary.Models
         public static string Name { get; set; }
         public static double Vat { get; set; }
         public static string CVR { get; set; }
-
         public static int ClubDiscount { get; set; }
     }
 }

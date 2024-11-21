@@ -22,13 +22,12 @@ namespace RazorBigMamma.Pages.Customers
         {
             if (!string.IsNullOrEmpty(FilterCriteria))
             {
-                //Customers = _repo.FilterEvents(FilterCriteria);
+                Customers = _repo.FilterCustomers(FilterCriteria);
             }
             else
             {
                 Customers = _repo.GetAll();
             }
-
         }
     }
 }

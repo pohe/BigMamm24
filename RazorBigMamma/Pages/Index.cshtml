@@ -3,8 +3,12 @@
 @{
     ViewData["Title"] = "Home page";
 }
-
+<p>Dato: @DateTime.Now.Day - @DateTime.Now.Month - - @DateTime.Now.Month- @DateTime.Now.Year </p>
 <div class="text-center">
-    <h1 class="display-4">Welcome</h1>
+    @for(int i = 0; i <3; i++)
+    {
+        <h1 class="display-4">Welcome to Big Mamma</h1>
+    }
+    <p>@Model.Message</p>
     <p>Learn about <a href="https://learn.microsoft.com/aspnet/core">building Web apps with ASP.NET Core</a>.</p>
 </div>

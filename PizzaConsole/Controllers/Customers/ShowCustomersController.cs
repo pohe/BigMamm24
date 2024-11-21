@@ -15,7 +15,7 @@ namespace PizzaConsole.Controllers.Customers
             _customerRepository = customerRepository;
         }
 
-        public void ShowAllMenuItems()
+        public void ShowAllCustomers()
         {
             _customerRepository.PrintAllCustomers();
         }

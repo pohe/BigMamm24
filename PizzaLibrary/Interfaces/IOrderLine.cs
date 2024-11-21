@@ -9,7 +9,8 @@ namespace PizzaLibrary.Interfaces
         int Id { get; }
         MenuItem MenuItem { get; }
         void AddExtraAccessory(Accessory accessory);
-        double OrderlineTotal();
+        double SubTotal();
         string ToString();
+
     }
 }

@@ -10,4 +10,8 @@
     <ProjectReference Include="..\PizzaLibrary\PizzaLibrary.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="wwwroot\images\customerImages\" />
+  </ItemGroup>
+
 </Project>

@@ -15,14 +15,20 @@ namespace PizzaLibrary.Models
         #endregion
 
         #region Properties
-        public int No { get { return _no; } }
+        public int No { get { return _no; } set { _no = value; } }
         public string Name { get; set; }
         public double Price { get; set; }
         public string Description { get; set; }
         public MenuType TheMenuType { get; set; }
-        #endregion 
+        #endregion
 
         #region Constructors
+
+        public MenuItem()
+        {
+            counter++;
+            _no = counter;
+        }
         public MenuItem(string name, double price, string description, MenuType menuType)
         {
             counter++;
@@ -39,6 +45,8 @@ namespace PizzaLibrary.Models
         {
             return $"Nr {No} Navn {Name} Beskrivelse {Description} Price {Price} MenuType {TheMenuType.ToString()}";
         }
+
+       
         #endregion
     }
 }

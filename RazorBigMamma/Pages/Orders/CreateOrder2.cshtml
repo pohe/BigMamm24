@@ -1,0 +1,37 @@
+﻿@page
+@model RazorBigMamma.Pages.Orders.CreateOrder2Model
+@{
+    ViewData["Title"] = "CreateOrder 2";
+}
+
+<h1>Select Customer</h1>
+
+
+
+<form method="post" asp-page-handler="Customer">
+    <p>
+        Mobile : <input type="text" asp-for="SearchCustomerMobile" />
+
+        <input type="submit" value="Search customer" />
+    </p>
+</form>
+
+
+@{
+    if (Model.TheCustomer != null)
+    {
+        <p>
+            <h2>@Model.TheCustomer.Name,@Model.TheCustomer.Address, @Model.TheCustomer.Mobile</h2>
+        </p>
+    }
+}
+
+<h1>Add to Order</h1>
+<form method="post" asp-page-handler="AddToOrder">
+    <label value="MenuItems"></label>
+    <select id="ChoosenMenuItem" name="ChoosenMenuItem" asp-for="@Model.ChoosenMenuItem"
+            asp-items="@Model.MenuItemSelectList"></select>
+    <input type="text" asp-for="@Model.Amount" />
+    <textarea asp-for="@Model.Comment" cols="120" class="form-control"></textarea>
+    <input type="submit" class="btn btn-primary" value="AddToOrder" />
+</form>

@@ -10,6 +10,7 @@ namespace PizzaLibrary.Models
     public class OrderLine : IOrderLine
     {
         #region Instance fields
+        private static int _count = 0;
         private int _id;
         private int _amount;
         private MenuItem _menuItem;
@@ -30,6 +31,8 @@ namespace PizzaLibrary.Models
         #region Constructors
         public OrderLine(MenuItem menuItem, int amount, string comment)
         {
+            _count++;
+            _id = _count;
             _menuItem = menuItem;
             _amount = amount;
             Comment = comment;
@@ -43,7 +46,7 @@ namespace PizzaLibrary.Models
         {
             _accessories.Add(accessory);
         }
-        public double OrderlineTotal()
+        public double SubTotal()
         {
             double accessoriesTotal = 0;
             foreach (var accessories in _accessories)
@@ -51,6 +54,11 @@ namespace PizzaLibrary.Models
                 accessoriesTotal = accessoriesTotal + accessories.Price;
             }
             return _amount * _menuItem.Price + accessoriesTotal;
+        }
+
+        public List<Accessory> GetAllAccessory()
+        {
+            return _accessories;
         }
 
         public override string ToString()

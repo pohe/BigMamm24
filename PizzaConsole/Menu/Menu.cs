@@ -12,7 +12,9 @@ namespace PizzaConsole.Menu
 {
     public class Menu
     {
-        private static string mainMenuChoices = "\t1.Vis Pizzamenu\n\t2.Vis Kunder\n\t3.Add Customer\n\t4.Lav bestilling\n\tQ.Afslut\n\n\tIndtast valg:";
+        //private static string mainMenuChoices = "\t1.Vis Pizzamenu\n\t2.Vis Kunder\n\t3.Add Customer\n\t4.add Pizza\n\t5.Lav bestilling\n\tQ.Afslut\n\n\tIndtast valg:";
+        private static string mainMenuChoices = "\t1.Vis Pizzamenu\n\t2.Vis Kunder\n\t3.Add Customer\n\t4.add Pizza\n\tQ.Afslut\n\n\tIndtast valg:";
+
         private static string orderMenuChoices = "\t1.Tilføj bestilling\n\t2.Vis total\n\t3.Tilføj kunde\n\tQ.Afslut ordermenu\n\n\tIndtast valg:";
 
         private CustomerRepository _customerRepository = new CustomerRepository();
@@ -42,7 +44,9 @@ namespace PizzaConsole.Menu
                         break;
                     case "2":
                         Console.WriteLine("Valg 2");
-                        _customerRepository.PrintAllCustomers();
+                        //_customerRepository.PrintAllCustomers();
+                        ShowCustomersController showCustomersController = new ShowCustomersController(_customerRepository);
+                        showCustomersController.ShowAllCustomers();
                         Console.ReadLine();
                         break;
                     case "3":
@@ -53,6 +57,7 @@ namespace PizzaConsole.Menu
                         break;
                     case "4":
                         Console.WriteLine("Valg 4");
+
                         break;
                     default:
                         Console.WriteLine("Angiv et tal fra 1..4 eller q for afslut");

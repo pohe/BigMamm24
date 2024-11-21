@@ -1,0 +1,37 @@
+﻿@page
+@model RazorBigMamma.Pages.MenuItems.DeleteMenuItemModel
+@{
+    ViewData["Title"] = "DeleteMenuItem";
+}
+
+
+<h1>Delete Customer</h1>
+<div class="row">
+    <div class="col-md-4">
+        <form method="post">
+            <div class="form-group">
+                <label asp-for="@Model.MenuItem.No" class="control-label"></label>
+                <input asp-for="@Model.MenuItem.No" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItem.Name" class="control-label"></label>
+                <input asp-for="@Model.MenuItem.Name" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItem.Description" class="control-label"></label>
+                <input asp-for="@Model.MenuItem.Description" class="form-control" />
+            </div>
+            <div class="form-group">
+                <label asp-for="@Model.MenuItem.Price" class="control-label"></label>
+                <input asp-for="@Model.MenuItem.Price" class="form-control" />
+            </div>
+            
+            <div class="formgroup">
+                <input type="submit" value="Delete" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+    <div>
+        <a asp-page="Index">Back to List</a>
+    </div>
+</div>

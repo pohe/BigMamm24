@@ -1,4 +1,5 @@
-﻿using PizzaLibrary.Interfaces;
+﻿using PizzaLibrary.Data;
+using PizzaLibrary.Interfaces;
 using PizzaLibrary.Models;
 using System;
 using System.Collections.Generic;
@@ -10,34 +11,48 @@ namespace PizzaLibrary.Services
 {
     public class AccessoriesRepository : IAccessoriesRepository
     {
-        public int Count => throw new NotImplementedException();
+        private List<Accessory> _accessories;
+        public int Count {  get { return _accessories.Count; } }
+
+        public AccessoriesRepository()
+        {
+            _accessories = MockData.AccessoryData;
+        }
 
         public void AddAccessory(Accessory accessory)
         {
-            throw new NotImplementedException();
+            _accessories.Add(accessory);
         }
         public List<Accessory> GetAll()
         {
-            throw new NotImplementedException();
+            return  _accessories;
         }
 
         public Accessory GetAccessoryById(int id)
         {
-            throw new NotImplementedException();
+            foreach(Accessory ac in _accessories)
+            {
+                if (ac.Id == id)
+                {
+                    return ac;
+                }
+            }
+            return null;
         }
 
         public void PrintAllAccessories()
         {
-            throw new NotImplementedException();
+            foreach(Accessory ac in _accessories)
+            {
+                Console.WriteLine(ac.ToString());
+            }
         }
 
         public void RemoveAccessory(int id)
         {
-            throw new NotImplementedException();
+            Accessory accessoryToRemove = GetAccessoryById(id);
+            if (accessoryToRemove != null)
+                _accessories.Remove(accessoryToRemove);
         }
-
-        
-
-        
     }
 }

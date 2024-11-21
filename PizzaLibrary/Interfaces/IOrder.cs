@@ -9,5 +9,6 @@ namespace PizzaLibrary.Interfaces
         void AddOrderLine(OrderLine line);
         double CalculateTotal();
         void PrintReciept();
+        public List<OrderLine> GetAllOrderLines();
     }
 }

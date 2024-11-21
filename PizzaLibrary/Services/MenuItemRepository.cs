@@ -56,5 +56,65 @@ namespace PizzaLibrary.Services
                 Console.WriteLine(menuItem);
             }
         }
+
+        public IMenuItem FindMostExpensivePizza()
+        {
+            IMenuItem mostExpensive = null;
+            if (_menuItemList == null)
+                return null;
+            if (_menuItemList.Count > 0)
+                mostExpensive = _menuItemList[0];
+            foreach (MenuItem menuItem in _menuItemList)
+            {
+                if ((menuItem.TheMenuType == MenuType.PIZZECLASSSICHE || menuItem.TheMenuType == MenuType.PIZZESPECIALI) && menuItem.Price > mostExpensive.Price)
+                    mostExpensive = menuItem;
+            }
+            return mostExpensive;
+        }
+        public MenuItem MostExpensivePizza()
+        {
+            if (_menuItemList == null || _menuItemList.Count == 0)
+            {
+                return null;
+            }
+            MenuItem mostExpensive = new MenuItem();
+            mostExpensive.Price = 0;//Er default 0
+            foreach (MenuItem menuItem in _menuItemList)
+            {
+                if (menuItem.TheMenuType == MenuType.PIZZECLASSSICHE
+                    || menuItem.TheMenuType == MenuType.PIZZESPECIALI
+                    && menuItem.Price > mostExpensive.Price)
+                {
+                    mostExpensive = menuItem;
+                }
+
+            }
+            return mostExpensive;
+        }
+
+        public List<MenuItem> FilterMenuItems(string filterCriteria)
+        {
+            throw new NotImplementedException();
+        }
+
+        public void UpdateMenuItem(MenuItem currentMenuItem)
+        {
+            if (currentMenuItem != null)
+            {
+                foreach (var menuItem in _menuItemList)
+                {
+                    if (menuItem.No == currentMenuItem.No)
+                    {
+                        //menuItem.No = currentMenuItem.No;
+                        menuItem.Name = currentMenuItem.Name;
+                        menuItem.Description = currentMenuItem.Description;
+                        menuItem.Price = currentMenuItem.Price;
+                        menuItem.TheMenuType = currentMenuItem.TheMenuType;
+                        return;
+                    }
+                }
+            }
+
+        }
     }
 }

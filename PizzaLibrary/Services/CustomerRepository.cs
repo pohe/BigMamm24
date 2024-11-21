@@ -85,6 +85,72 @@ namespace PizzaLibrary.Services
             }
             return returnString;
         }
+
+        public void UpdateCustomer(Customer customer)
+        {
+            if (customer != null)
+            {
+                foreach (var cus in _customers.Values)
+                {
+                    if (cus.Id == customer.Id)
+                    {
+                        //cus.Id = customer.Id; //ikke muligt, da id anvendes som key
+                        cus.Name = customer.Name;
+                        cus.Address = customer.Address;
+                        cus.Mobile = customer.Mobile;
+                        cus.ClubMember = customer.ClubMember;
+                        return;
+                    }
+                }
+            }
+        }
+
+        public void UpdateCustomer(int id, string name, string mobile, string address)
+        {
+            foreach (var cus in _customers.Values)
+            {
+                if (cus.Id == id)
+                {
+                    cus.Mobile = mobile; // burde ikke kunne ændres
+                    //cus.Id = customer.Id; //ikke muligt, da id anvendes som key
+                    cus.Name = name;
+                    cus.Address = address;
+                    cus.Mobile = mobile; // burde ikke kunne ændres
+                    return;
+                }
+            }
+        }
+
+
+
+
+
+        public List<Customer> FilterCustomers(string name)
+        {
+            List<Customer> filteredList = new List<Customer>();
+            foreach (var cu in _customers.Values)
+            {
+                if (cu.Name.Contains(name))
+                {
+                    filteredList.Add(cu);
+                }
+            }
+            return filteredList;
+
+        }
+
+        public Customer GetCustomerById(int id)
+        {
+            foreach (var cu in _customers.Values)
+            {
+                if (cu.Id == id)
+                    return cu;
+            }
+            return new Customer();
+        }
+
+        
+
         #endregion
     }
 }

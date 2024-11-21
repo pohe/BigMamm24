@@ -15,6 +15,8 @@ namespace PizzaLibrary.Interfaces
         MenuItem GetMenuItemByNo(int no);
         void RemoveMenuItem(int no);
 
+        void UpdateMenuItem(MenuItem currentMenuItem);
         void PrintAllMenuItems();
+        List<MenuItem> FilterMenuItems(string filterCriteria);
     }
 }

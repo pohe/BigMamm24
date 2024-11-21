@@ -1,0 +1,119 @@
+﻿@page
+@using PizzaLibrary.Interfaces
+@using PizzaLibrary.Models
+@inject IShoppingBasket _shoppingBasket;
+@model CreateOrderModel
+@{
+    ViewData["Title"] = "CreateOrder";
+}
+
+<h1>Select Customer</h1>
+
+
+
+<form method="post" asp-page-handler="Customer">
+    <p>
+        Mobile : <input type="text" asp-for="SearchCustomerMobile" />
+        
+        <input type="submit" value="Search customer" />
+    </p>
+ </form>
+
+
+@{
+    if (Model.TheCustomer!= null)
+    {
+        <p>@Model.TheCustomer.Name
+        </p>
+    }
+}
+
+<h1>Add to Order</h1>
+<form method="post" asp-page-handler="AddToOrder">
+    <label value="MenuItems"></label>
+    <select id="ChoosenMenuItem" name="ChoosenMenuItem" asp-for="@Model.ChoosenMenuItem"
+        asp-items="@Model.MenuItemSelectList"></select>
+    <input type="text" asp-for="@Model.Amount" />
+    <textarea asp-for="@Model.Comment" cols="120" class="form-control"></textarea>
+    <input type="submit" class="btn btn-primary" value="AddToOrder" />
+</form>
+
+<form method="post" asp-page-handler="Delivery">
+<label class="custom-control-label">Where to eat</label>
+<br>
+@foreach (string where in Model.WhereToEat)
+{
+    <input type="radio" asp-for="@Model.Delivery" value="@where"/> @where
+    <br />
+}
+<input type="submit" />
+</form>
+
+<h1>Shopping Basket</h1> 
+<p>
+    Total beløb kr. 
+    @{
+        double total = 0;
+        foreach(OrderLine orderLine in _shoppingBasket.GetAll())
+        {
+            total += orderLine.SubTotal();
+        }
+    }
+    @total
+    <div>moms kr @{ double moms= (total * 20.0 / 100);}
+    @moms
+    }</div>
+</ p >
+<table class="table">
+    <thead>
+        <tr>
+            <th>Name</th>
+            <th>Amount</th>
+            <th>Comment</th>
+            <th>Extra</th>
+            <th>Sub total</th>
+            <th>Add extra</th>
+            <th>Operations</th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (@Model.OrderLines != null)
+        {
+            @foreach (var item in Model.OrderLines)
+            {
+                <tr>
+                    <td>@item.MenuItem.Name</td>
+                    <td>@item.Amount</td>
+                    <td>@item.Comment</td>
+                    <td>@{
+                            foreach(Accessory asseccory in item.GetAllAccessory())
+                            {
+                                <div>@asseccory.Name</div>
+                            }
+                        }
+                    </td>
+                    <td>kr. @item.SubTotal()</td>
+                    <td>
+                        <form method="post">
+                            <select id="ChoosenAsseccory" name="ChoosenAsseccory" asp-for="@Model.ChoosenAsseccory"
+                                asp-items="@Model.AsseccorySelectList" ></select>
+                            <button asp-page-handler="AddAccessories" asp-route-orderLineId=@item.Id
+                                    class="btn btn-primary btn-group-lg pull-right">
+                                Extra
+                            </button>
+                        </form>
+                    </td>
+                    <td>
+                        <form method="post">
+                            <button asp-page-handler="DeleteOrderLine" asp-route-orderLineId=@item.Id
+                                    class="btn btn-danger btn-group-lg pull-right">
+                                Delete
+                            </button>
+                        </form>
+                    </td>
+                    
+                </tr>
+            }
+        }
+    </tbody>
+</table>

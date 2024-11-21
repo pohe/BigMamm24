@@ -24,14 +24,21 @@ namespace PizzaLibrary.Models
         public bool ToBeDelivered { get; private set; }
 
         #region Constructors
-        public Order(Customer customer, bool toBeDelivered)
+        public Order(Customer customer, bool toBeDelivered):this()
+        {
+            //_counter++;
+            //_id = _counter;
+            //_created = DateTime.Now;
+            //_lines = new List<OrderLine>();
+            _customer = customer;
+            ToBeDelivered = toBeDelivered;
+        }
+        public Order()
         {
             _counter++;
             _id = _counter;
             _created = DateTime.Now;
             _lines = new List<OrderLine>();
-            _customer = customer;
-            ToBeDelivered = toBeDelivered;
         }
         #endregion
 
@@ -46,7 +53,7 @@ namespace PizzaLibrary.Models
             double total = 0;
             foreach (OrderLine line in _lines)
             {
-                total += line.OrderlineTotal();
+                total += line.SubTotal();
             }
             total += (ToBeDelivered) ? 40 : 0;
             return total;
@@ -61,6 +68,11 @@ namespace PizzaLibrary.Models
                 Console.WriteLine(line.ToString());
             }
             Console.WriteLine($"Total pris {CalculateTotal()} kr. moms {CalculateTotal() / 5}");
+        }
+
+        public List<OrderLine> GetAllOrderLines()
+        {
+            return _lines;
         }
         #endregion
     }
